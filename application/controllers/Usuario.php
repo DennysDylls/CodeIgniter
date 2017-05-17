@@ -1,100 +1,91 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Usuario extends CI_Controller {
 
-	public function __construct()
-	{
-		parent::__construct();
+    public function __construct() {
+        parent::__construct();
 
-		// Verifica se o usuário NÂO está logado
-		// e redireciona para a autenticação.
-		if(!$this->session->userdata('logado'))
-		{
-			redirect('conta/entrar');
-		}
-	}
-	
-	// Exibir informações sobre o nosso sistema
-	public function visualizar_todos(){
+        // Verifica se o usuário NÂO está logado
+        // e redireciona para a autenticação.
+        if (!$this->session->userdata('logado')) {
+            redirect('conta/entrar');
+        }
+    }
 
-		$alerta = null;
+    // Exibir informações sobre o nosso sistema
+    public function visualizar_todos() {
 
-		// Para carregar o model: usuarios_model
-		$this->load->model('usuarios_model'); // cuidado com cse sensitive
+        $alerta = null;
 
-		$usuarios = $this->usuarios_model->get_usuarios();
+        // Para carregar o model: usuarios_model
+        $this->load->model('usuarios_model'); // cuidado com cse sensitive
 
-		/*var_dump($usuarios); // para ver o que esta entrando
+        $usuarios = $this->usuarios_model->get_usuarios();
 
-		exit;*/
+        /* var_dump($usuarios); // para ver o que esta entrando
 
-		$dados = array(
-			"alerta" => $alerta,
-			"usuarios" => $usuarios
-			);
+          exit; */
 
-		$this->load->view('usuario/visualizar_todos', $dados);
-	}
+        $dados = array(
+            "alerta" => $alerta,
+            "usuarios" => $usuarios
+        );
 
-		public function cadastrar(){
+        $this->load->view('usuario/visualizar_todos', $dados);
+    }
 
-		$alerta = null;
+    public function cadastrar() {
 
-		$dados = array(
-			"alerta" => $alerta
-			);
+        $alerta = null;
 
-		$this->load->view('usuario/visualizar_todos', $dados);
-	}
+        $dados = array(
+            "alerta" => $alerta
+        );
 
-	public function editar($id_usuario)
-	{
-		$alerta = null;
-		$usuario = null;
+        $this->load->view('usuario/visualizar_todos', $dados);
+    }
 
-		// Converte o id do usuário para int
-		$id_usuario = (int) $id_usuario;
+    public function editar($id_usuario) {
+        $alerta = null;
+        $usuario = null;
 
-		if ($id_usuario)
-		{
-			// Carrega o model
-			$this->load->model('usuarios_model');
+        // Converte o id do usuário para int
+        $id_usuario = (int) $id_usuario;
 
-			// Verifica se o usuário está cadastrado no banco
-			$existe = $this->usuarios_model->get_usuario($id_usuario);
-			if($existe)
-			{
-				// Armazena em uma variável legível
-				$usuario = $existe;
-			}
-			else
-			{
-				// Define um valor vazio para o usuário
-				$usuario = FALSE;
+        if ($id_usuario) {
+            // Carrega o model
+            $this->load->model('usuarios_model');
 
-				// Usuário não existe
-				$alerta = array(
-					"class" => "danger",
-					"mensagem" => "Atenção! O Usuário não foi encontrado!"
-				);
-			}
+            // Verifica se o usuário está cadastrado no banco
+            $existe = $this->usuarios_model->get_usuario($id_usuario);
+            if ($existe) {
+                // Armazena em uma variável legível
+                $usuario = $existe;
+            } else {
+                // Define um valor vazio para o usuário
+                $usuario = FALSE;
 
-		}
-		else
-		{
-			// Usuário invalido
-			$alerta = array(
-				"class" => "danger",
-				"mensagem" => "Atenção! O Usuário informado está incorretos."
-			);
-		}
+                // Usuário não existe
+                $alerta = array(
+                    "class" => "danger",
+                    "mensagem" => "Atenção! O Usuário não foi encontrado!"
+                );
+            }
+        } else {
+            // Usuário invalido
+            $alerta = array(
+                "class" => "danger",
+                "mensagem" => "Atenção! O Usuário informado está incorretos."
+            );
+        }
 
-		$dados = array(
-			"alerta"  => $alerta,
-			"usuario" => $usuario
-		);
-		$this->load->view('usuario/editar', $dados);
+        $dados = array(
+            "alerta" => $alerta,
+            "usuario" => $usuario
+        );
+        $this->load->view('usuario/editar', $dados);
+    }
 
-	}
 }
