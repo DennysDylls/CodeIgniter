@@ -73,6 +73,8 @@
 
                     <?php if ($usuario) { ?>
                         <form action="<?php echo base_url("usuario/editar/" . $usuario["id"]); ?>" method="POST" class="form-horizontal">
+                            <input type="hidden" name="captcha">
+                            <input type="hidden" name="id_usuario" value="<?php echo $usuario["id"]; ?>">
                             <div class="form-group">
                                 <label for="email" class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-10">
@@ -96,7 +98,7 @@
                                     <a href="<?php echo base_url('usuario/visualizar_todos'); ?>" type="" class="btn btn-default">Voltar</a>
                                 </div>
                                 <div class="col-sm-offset-2 col-sm-4">
-                                    <button type="submit" class="btn btn-success pull-right">Finalizar Edição</button>
+                                    <button type="submit" name="editar" value="editar" class="btn btn-success pull-right">Finalizar Edição</button>
                                 </div>
                             </div>
                         </form>
