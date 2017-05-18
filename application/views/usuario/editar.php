@@ -44,7 +44,7 @@
                                 <li><a href="<?php echo base_url('usuario/visualizar_todos'); ?>">Visualizar</a></li>
                                 <li><a href="#">Cadastrar</a></li>
                             </ul>
-                        </li>
+                        </li> 
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">

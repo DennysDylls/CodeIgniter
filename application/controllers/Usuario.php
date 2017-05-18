@@ -75,12 +75,11 @@ class Usuario extends CI_Controller {
 
                     // Verificar se as regras são atendidas
                     if ($this->form_validation->run() === TRUE) {
-                        
+
                         $usuario_atualizado = array(
                             "email" => $this->input->POST('email'),
                             "senha" => $this->input->POST('senha')
                         );
-                        
                     } else {
                         // Formulário inválido
                         $alerta = array(
