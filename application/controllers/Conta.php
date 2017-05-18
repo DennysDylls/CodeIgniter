@@ -2,13 +2,17 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Conta extends CI_Controller {
+class Conta extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
-        if ($this->session->userdata('logado')) {
-            if (!$this->uri->segment(2) == "sair") {
+        if ($this->session->userdata('logado'))
+        {
+            if (!$this->uri->segment(2) == "sair")
+            {
                 redirect('dashboard');
             }
         }/*
@@ -24,7 +28,8 @@ class Conta extends CI_Controller {
          */
     }
 
-    public function entrar() {
+    public function entrar()
+    {
         //echo base_url('assets/css/bootstrap.min.css');
 
         /* só para verificar se o post está funcionando, tem que carregar a página sem este código */
@@ -33,7 +38,8 @@ class Conta extends CI_Controller {
 
         $alerta = null;
 
-        if ($this->input->post('entrar') === "entrar") {
+        if ($this->input->post('entrar') === "entrar")
+        {
             // echo "O formulário foi submetido.";
             if ($this->input->post('captcha'))
                 redirect('conta/entrar');
@@ -43,7 +49,8 @@ class Conta extends CI_Controller {
             $this->form_validation->set_rules('senha', 'SENHA', 'required|min_length[6]|max_length[20]');
 
             // Executa as regras de validação
-            if ($this->form_validation->run() === TRUE) {
+            if ($this->form_validation->run() === TRUE)
+            {
                 // Carrega o model "usuarios_model" apenas para este 'momento'
                 $this->load->model('usuarios_model');
 
@@ -56,32 +63,37 @@ class Conta extends CI_Controller {
 
                 // recebe o resultado de 'login_existe' da class Usuarios_model
                 // Verificando se os dados digitados estão corretos
-                if ($login_existe) {
+                if ($login_existe)
+                {
                     // Login autoriazado... iniciar sessão
                     $usuario = $login_existe;
 
                     // configura os dados da sessão
                     $session = array(
                         // pega do banco
-                        'email' => $usuario["email"],
+                        'email'   => $usuario["email"],
                         'created' => $usuario["created"],
-                        'logado' => TRUE
+                        'logado'  => TRUE
                     );
 
                     // inicializa a sessão e redirecionar para algum lugar restrito
                     $this->session->set_userdata($session);
 
                     redirect('dashboard');
-                } else {
+                }
+                else
+                {
                     // Login invalido
                     $alerta = array(
-                        "class" => "danger",
+                        "class"    => "danger",
                         "mensagem" => "Atenção! Login inválido, senha ou email incorretos."
                     );
                 }
-            } else {
+            }
+            else
+            {
                 $alerta = array(
-                    "class" => "danger",
+                    "class"    => "danger",
                     "mensagem" => "Atenção! Falha na validação do formulário!<br>" . validation_errors()
                 );
             }
@@ -94,8 +106,8 @@ class Conta extends CI_Controller {
         $this->load->view('conta/entrar', $dados);
     }
 
-    public function sair() {
-
+    public function sair()
+    {
         // apenas remove o logado
         //$this->session->unset_userdata('logado');
         // destruir toda a sessão

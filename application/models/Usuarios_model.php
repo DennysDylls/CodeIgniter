@@ -2,32 +2,57 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Usuarios_model extends CI_Model {
+class Usuarios_model extends CI_Model
+{
 
-    public function get_usuario($id_usuario) {
+    public function get_usuario($id_usuario)
+    {
         $this->db->where("id", $id_usuario); // WHERE "id" = $i_usuario
 
         $usuario = $this->db->get('usuarios'); // SELECT * FROM usuario WHERE "id" = $id_usuario
 
-        if ($usuario->num_rows()) {
+        if ($usuario->num_rows())
+        {
             return $usuario->row_array();
-        } else {
+        }
+        else
+        {
             return FALSE;
         }
     }
 
-    public function get_usuarios() {
+    public function get_usuarios()
+    {
         $query = $this->db->get('usuarios'); // SELECT * FROM usuarios (nome da tabela para ele buscar)
         // Verificar se tem alguma coisa
-        if ($query->num_rows()) {
+        if ($query->num_rows())
+        {
             // Retorna o resultado
             return $query->result_array();
-        } else {
+        }
+        else
+        {
             return FALSE;
         }
     }
 
-    public function check_login($email, $senha) {
+    public function update_usuario($id_usuario, $usuario_atualizado)
+    {
+        $this->db->where("id", $id_usuario); // WHERE "id" = $id_usuario
+        $this->db->update("usuarios", $usuario_atualizado); // UPDATE 'usuarios' SET {{índice}} = {{valor}}
+
+        if ($this->db->affected_rows())
+        {
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    public function check_login($email, $senha)
+    {
         // Definindo o parâmetro FROM
         $this->db->from('usuarios');
 
@@ -39,10 +64,13 @@ class Usuarios_model extends CI_Model {
         $usuarios = $this->db->get();
 
         // Verificando o resuldado da busca acima
-        if ($usuarios->num_rows()) {
+        if ($usuarios->num_rows())
+        {
             $usuario = $usuarios->result_array();
             return $usuario[0];
-        } else {
+        }
+        else
+        {
             return FALSE;
         }
     }
