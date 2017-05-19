@@ -32,7 +32,7 @@
 	    			</div>
 	    		<?php } ?>
 	    		<!-- poderia criar um "help" para chamar o alerta -->
-				  <form action="<?php echo base_url('conta/entrar'); ?>" method="post">
+				  <form action="<?php echo base_url('conta/entrar'); ?>" method="POST">
 				  <input type="hidden" name="captcha">
 				  <div class="form-group">
 				    <label for="email">Email</label>

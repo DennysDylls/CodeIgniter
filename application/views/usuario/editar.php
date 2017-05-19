@@ -78,7 +78,7 @@
                             <div class="form-group">
                                 <label for="email" class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="<?php echo $usuario["email"]; ?>" required>
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="<?php echo set_value('email') ? set_value('email') : $usuario["email"]; ?>" required> <!-- repopulando campos do formulário -->
                                 </div>
                             </div>
                             <div class="form-group">
@@ -95,7 +95,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-4">
-                                    <a href="<?php echo base_url('usuario/visualizar_todos'); ?>" type="" class="btn btn-default">Voltar</a>
+                                    <a href="<?php echo base_url('usuario/visualizar_todos'); ?>" type="submit" class="btn btn-default">Voltar</a>
                                 </div>
                                 <div class="col-sm-offset-2 col-sm-4">
                                     <button type="submit" name="editar" value="editar" class="btn btn-success pull-right">Finalizar Edição</button>

@@ -72,16 +72,16 @@ class Usuario extends CI_Controller
                 // Armazena em uma variável legível
                 $usuario = $existe;
 
-                if ($this->input->POST('editar') === "editar")
+                if ($this->input->post('editar') === "editar")
                 {
                     // Converte também o id do usuário, que vem do POST, para int
-                    $id_usuario_form = (int) $this->input->POST('id_usuario');
+                    $id_usuario_form = (int) $this->input->post('id_usuario');
                     
-                    if ($this->input->POST('captcha'))
+                    if ($this->input->post('captcha'))
                         redirect('conta/editar');
                     /* // só testar id
                     echo $id_usuario;
-                    echo $this->input->POST('id_usuario');
+                    echo $this->input->post('id_usuario');
                     exit;
                     */
                     if ($id_usuario !== $id_usuario_form)
@@ -96,11 +96,11 @@ class Usuario extends CI_Controller
                     if ($this->form_validation->run() === TRUE)
                     {
                         $usuario_atualizado = array(
-                            "email" => $this->input->POST('email'), // índice do array
-                            "senha" => $this->input->POST('senha') // índice do array
+                            "email" => $this->input->post('email'), // índice do array
+                            "senha" => $this->input->post('senha') // índice do array
                         );
 
-                        // $this->usuarios_model->update_usuario($this->input->POST('id'), $usuario_atualizado);
+                        // $this->usuarios_model->update_usuario($this->input->post('id'), $usuario_atualizado);
                         $atualizou = $this->usuarios_model->update_usuario($id_usuario, $usuario_atualizado);
 
                         if ($atualizou)
